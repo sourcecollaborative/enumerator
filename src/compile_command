@@ -1,2 +1,0 @@
-#!/bin/sh
-g++ -Wall main.cpp VT100.cpp utilities.cpp Warning.cpp Message.cpp
