@@ -94,7 +94,8 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 	// Open the input file stream:
 	std::ifstream file(filePath);
 	if (file.is_open()) {
-	
+
+		// Start at the beginning:	
 		file.seekg(0, file.beg);
 
 		//unsigned int beginning = file.gtell();	
@@ -104,7 +105,8 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 		// Determine column delimiter:
 		char delimiter = determineDelimiter(firstLine);
 		
-		// Go back to the first line:
+		// Go back to the first line so that it will be
+		// included in the processing loop:
 		file.seekg(0, file.beg);
 
 		//output << firstLine << std::endl;
@@ -143,17 +145,17 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 				return;
 			}
 
-			// DEBUGGING / TESTING OUTPUT
-			//output << "<< -----" << (++lc) << "----- >>" << std::endl;
 			split(column,buffer,bufferSize,delimiter,line);
 			unsigned cc=0;
 			
 			// PRINT ROW NUMBER:
-			std::cout << lc << ": ";
+			std::cout << vt100::startBlue << lc << ": " << vt100::stopColor ;
 
 			// NOW PRINT COLUMNS:
 			for(auto i=column.begin();i<column.end();i++){
 				++cc;
+
+				std::cout << vt100::startSalmon;
 				if(cc<limit){
 					std::cout << numeral[cc];
 				}else{
@@ -161,8 +163,14 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 					// have too many columns to deal with:
 					std::cout << "✿";
 				}
+				std::cout << vt100::stopColor;
+
+				// Print column content:
 				std::cout << *i;
-				std::cout << delimiter ;
+				// Print delimiter:
+				if(i+1 != column.end()){
+					std::cout << delimiter;
+				}
 			}
 
 			// FINALLY PRINT END OF THE LINE:
