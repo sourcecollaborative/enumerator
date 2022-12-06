@@ -187,10 +187,10 @@ int main(int argc,char *argv[]){
 	clp.addSwitch("--start","-s","Specify a starting row to display",1);
 	clp.addSwitch("--count","-c","Specify the number of rows to display",1);
 	clp.addSwitch("--end","-e","Specify an ending row to display",1);
-	clp.addSwitch("--all","-a","Display all rows from a file");
+	//clp.addSwitch("--all","-a","Display all rows from a file");
 	// Example of a switch that requires a parameter to follow after it:
 	//clp.addSwitch("--font","-f","Font to be used",1);
-	clp.addUsage("enumerator [options] [csv_file_paths]\n\nThis tool displays an enumeration of columns on the terminal.\nBy default, a sequence of 100 lines from a random starting point in the file are displayed.");
+	clp.addUsage("enumerator [options] [csv_file_paths]\n\nThis tool displays an enumeration of columns on the terminal.\nBy default, lines 1 to 100 are shown. (Use options to specify a different range).");
 
 	if(!clp.parse(argc,argv)){
 		exit(1);
