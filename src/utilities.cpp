@@ -144,3 +144,28 @@ char determineDelimiter(std::string & firstLine){
 }
 
 
+//
+// printEnumerationDigits
+//
+std::string printEnumerationDigits(unsigned int value,unsigned int width){
+	// DEFAULT DOUBLE STRUCK SET:
+	const char * enumerationDigits[10]={
+		"𝟘","𝟙","𝟚","𝟛","𝟜","𝟝","𝟞","𝟟","𝟠","𝟡"
+	};
+	
+	// Break the value apart into power-of-ten components:
+	unsigned int digit[width];
+	// Initialize vector to zeros:
+	for(unsigned i=0;i<width;digit[i++]=0);
+	// Store the power-of-ten values in each slot:
+	for(int v=value, w=width-1 ; w>=0 && v ; --w,v/=10){
+		digit[w]=v%10;
+	}
+	// Prepare output:
+	std::string s;
+	for(unsigned i=0;i<width;i++){
+		s += enumerationDigits[ digit[i] ];
+	}
+	
+	return s;
+}

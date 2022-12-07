@@ -31,3 +31,7 @@ std::string timeDuration(std::chrono::steady_clock::time_point startTime,std::ch
 
 // determineDelimiter
 char determineDelimiter(std::string & firstLine);
+
+// printEnumerationDigits
+std::string printEnumerationDigits(unsigned int value,unsigned int width=3);
+

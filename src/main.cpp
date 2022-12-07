@@ -117,21 +117,26 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 		//
 		////////////////////////////////////////////////
 		
-		const unsigned limit=101;
+		const unsigned limit=151;
+		const unsigned symbolsLimit=51;
 		const char* numeral[] = {
 			"⓪",
-			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","㉈",
-			"⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","㉉",
-			"㉑","㉒","㉓","㉔","㉕","㉖","㉗","㉘","㉙","㉊",
-			"㉛","㉜","㉝","㉞","㉟","㊱","㊲","㊳","㊴","㉋",
-			"㊶","㊷","㊸","㊹","㊺","㊻","㊼","㊽","㊾","㉌",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩",
+			"⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳",
+			"㉑","㉒","㉓","㉔","㉕","㉖","㉗","㉘","㉙","㉚",
+			"㉛","㉜","㉝","㉞","㉟","㊱","㊲","㊳","㊴","㊵",
+			"㊶","㊷","㊸","㊹","㊺","㊻","㊼","㊽","㊾","㊿",
 			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","㉍",
 			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","㉎",
 			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","㉏",
 			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐙",
 			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟⑩",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟⑳",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟㉚",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟㊵",
+			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","🐟㊿"
 		};
-
 
 		unsigned lc=0; // line counter
 		while (std::getline(file, line)) {
@@ -149,19 +154,23 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 			unsigned cc=0;
 			
 			// PRINT ROW NUMBER:
-			std::cout << vt100::startBlue << lc << ": " << vt100::stopColor ;
+			std::cout << vt100::startCyan << lc << ": " << vt100::stopColor ;
 
 			// NOW PRINT COLUMNS:
 			for(auto i=column.begin();i<column.end();i++){
 				++cc;
 
-				std::cout << vt100::startSalmon;
-				if(cc<limit){
+				// SHOW EVERY TENTH COLUMN IN GREEN, OTHERWISE MAGENTA:
+				// THESE COLORS SHOULD BE EASY ENOUGH TO SEE ON ALL COLOR TERMINALS:
+				std::cout << (cc%10==0 ? vt100::startGreen : vt100::startMagenta);
+				// USE THE CIRCLED SYMBOLS WHILE THEY LAST ... THEN SWITCH TO
+				// THE DOUBLE-STRUCK SYMBOLS PROVIDED BY printEnumerationDigits:
+				if(cc<symbolsLimit){
+					// ENCIRCLED DIGITS:
 					std::cout << numeral[cc];
 				}else{
-					// Random sentinel in case we really
-					// have too many columns to deal with:
-					std::cout << "✿";
+					// DOUBLE-STRUCK DIGITS:
+					std::cout << printEnumerationDigits(cc,cc<100?2:3);
 				}
 				std::cout << vt100::stopColor;
 
