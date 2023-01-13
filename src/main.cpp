@@ -118,10 +118,11 @@ void process(std::string & filePath,unsigned rowStart=1,unsigned rowEnd=100){
 		////////////////////////////////////////////////
 		
 		const unsigned limit=151;
+		// Resort to the double-struck digit set after this limit:
 		const unsigned symbolsLimit=51;
 		const char* numeral[] = {
 			"⓪",
-			"①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩",
+			"⓵","⓶","⓷","⓸","⓹","⓺","⓻","⓼","⓽","⑩",
 			"⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳",
 			"㉑","㉒","㉓","㉔","㉕","㉖","㉗","㉘","㉙","㉚",
 			"㉛","㉜","㉝","㉞","㉟","㊱","㊲","㊳","㊴","㊵",
