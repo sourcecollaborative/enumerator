@@ -8,7 +8,9 @@
 # (c) 2022 by the Regents of the University of Michigan
 # 
 #     Released under the GNU GPL
-#     
+#
+cmake_minimum_required(VERSION 3.28)
+
 PROJECT(ENUMERATOR)
 CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 MARK_AS_ADVANCED(CMAKE_BACKWARDS_COMPATIBILITY)
