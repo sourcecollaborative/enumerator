@@ -31,12 +31,12 @@
 //
 void splashScreen(std::ostream &fs){
 
-	std::string welcome("Welcome to enumerator!");
+	std::string welcome(        "      Welcome to enumerator!       ");
 	printBoxedText(fs,welcome);
-	fs << vt100::startBlue << "   by Edward H. Trager    " << vt100::stopColor << std::endl;
-	fs << vt100::startBlue << " (c) 2022 Regents of the  " << vt100::stopColor << std::endl;
-	fs << vt100::startBlue << "  University of Michigan  " << vt100::stopColor << std::endl;
-	fs << vt100::startBlue << "   All Rights Reserved    " << vt100::stopColor << std::endl;
+	fs << vt100::startOrange << "        by Edward H. Trager        " << vt100::stopColor << std::endl;
+	fs << vt100::startBlue   << "  (c) 2026 by the SOURCE project   " << vt100::stopColor << std::endl;
+	fs << vt100::startGreen  << "University of Alabama at Birmingham" << vt100::stopColor << std::endl;
+	fs << vt100::startBlue   << "        All Rights Reserved        " << vt100::stopColor << std::endl;
 }
 
 //////////////////////////////
@@ -201,10 +201,14 @@ int main(int argc,char *argv[]){
 	clp.addUsage("enumerator [options] [csv_file_paths]\n\nThis tool displays an enumeration of columns on the terminal.\nBy default, lines 1 to 100 are shown. (Use options to specify a different range).");
 
 	if(!clp.parse(argc,argv)){
+		splashScreen(std::cerr);
+		clp.printHelp();
 		exit(1);
 	}
 
+
 	if(!clp.getArguments().size()){
+		splashScreen(std::cerr);
 		Warning("main","Specify at least one file for processing");
 		clp.printHelp();
 		exit(1);
